@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://b64ybh7dv7nhv"]
+
+[ext_resource type="Script" uid="uid://b8ninp8gdg60t" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://cw0nyhnrfqey6" path="res://bullet.tscn" id="2_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://dfnq8blj55od8" path="res://player.tscn" id="3_h2yge"]
+
+[sub_resource type="Curve2D" id="Curve2D_0xm2m"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1152, 0, 0, 0, 0, 0, 1152, 648, 0, 0, 0, 0, 0, 648, 0, 0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="Main" type="Node"]
+script = ExtResource("1_ig7tw")
+bullet_scene = ExtResource("2_0xm2m")
+
+[node name="StartTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="TestBulletTimer" type="Timer" parent="."]
+
+[node name="PlayerStartPosition" type="Marker2D" parent="."]
+position = Vector2(100, 100)
+
+[node name="BulletSpawnPath" type="Path2D" parent="."]
+curve = SubResource("Curve2D_0xm2m")
+
+[node name="BulletSpawnPosition" type="PathFollow2D" parent="BulletSpawnPath"]
+
+[node name="Player" parent="." instance=ExtResource("3_h2yge")]
+
+[connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="TestBulletTimer" to="." method="_on_test_bullet_timer_timeout"]
+[connection signal="hit" from="Player" to="." method="game_over"]

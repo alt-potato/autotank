@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cw0nyhnrfqey6"]
+
+[ext_resource type="Texture2D" uid="uid://pgk0oojtlcyg" path="res://assets/bloopyGun.png" id="1_v7oki"]
+[ext_resource type="Script" uid="uid://j1rr4tgsvqrg" path="res://bullet.gd" id="1_v8qja"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8qja"]
+radius = 11.18034
+
+[node name="Bullet" type="RigidBody2D"]
+collision_mask = 0
+gravity_scale = 0.0
+script = ExtResource("1_v8qja")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_v7oki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v8qja")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(1.125, 1.125)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
