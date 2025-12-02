@@ -1,0 +1,14 @@
+[configuration]
+entry_symbol = "gdext_rust_init"
+compatibility_minimum = 4.1
+reloadable = true
+
+[libraries]
+linux.debug.x86_64 =     "res://../sim/target/debug/libsim.so"
+linux.release.x86_64 =   "res://../sim/target/release/libsim.so"
+windows.debug.x86_64 =   "res://../sim/target/debug/sim.dll"
+windows.release.x86_64 = "res://../sim/target/release/sim.dll"
+macos.debug =            "res://../sim/target/debug/libsim.dylib"
+macos.release =          "res://../sim/target/release/libsim.dylib"
+macos.debug.arm64 =      "res://../sim/target/debug/libsim.dylib"
+macos.release.arm64 =    "res://../sim/target/release/libsim.dylib"
